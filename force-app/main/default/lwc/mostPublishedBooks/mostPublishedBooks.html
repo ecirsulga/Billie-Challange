@@ -1,0 +1,98 @@
+<template>
+    <lightning-card title="Most Published Books" icon-name="standard:knowledge">
+        <div class="slds-var-p-around_medium">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </template>
+            
+            <template if:false={isLoading}>
+                <template if:true={hasBooks}>
+                    <div class="slds-scrollable" style="max-height: 500px;">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Rank">#</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Title">Title</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Author">Author</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Publisher">Publisher</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Edition">Edition (copies)</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={books} for:item="book">
+                                    <tr key={book.id} class="slds-hint-parent">
+                                        <td data-label="Rank">
+                                            <div class="slds-truncate">{book.rank}</div>
+                                        </td>
+                                        <td data-label="Title">
+                                            <div class="slds-truncate book-title">{book.title}</div>
+                                        </td>
+                                        <td data-label="Author">
+                                            <div class="slds-truncate">{book.author}</div>
+                                        </td>
+                                        <td data-label="Publisher">
+                                            <div class="slds-truncate">{book.publisher}</div>
+                                        </td>
+                                        <td data-label="Edition">
+                                            <div class="slds-truncate">
+                                                <lightning-formatted-number 
+                                                    value={book.edition}
+                                                    format-style="decimal"
+                                                    maximum-fraction-digits="0">
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="slds-var-m-top_small slds-text-align_right">
+                        <span class="slds-text-body_small slds-text-color_weak">
+                            Total books: {totalBooks}
+                        </span>
+                    </div>
+                </template>
+                
+                <template if:false={hasBooks}>
+                    <div class="slds-text-align_center slds-var-p-around_large">
+                        <lightning-icon 
+                            icon-name="utility:info" 
+                            alternative-text="Info" 
+                            size="large"
+                            variant="inverse">
+                        </lightning-icon>
+                        <p class="slds-var-m-top_medium">No books to display yet.</p>
+                        <p class="slds-text-body_small slds-text-color_weak">
+                            Waiting for book data...
+                        </p>
+                    </div>
+                </template>
+            </template>
+            
+            <div class="slds-var-m-top_medium">
+                <lightning-button 
+                    label="Trigger Book Fetch" 
+                    variant="brand"
+                    onclick={handleTriggerFetch}>
+                </lightning-button>
+                <lightning-button 
+                    label="Clear List" 
+                    variant="neutral"
+                    onclick={handleClearList}
+                    class="slds-var-m-left_small">
+                </lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>

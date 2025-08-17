@@ -1,0 +1,12 @@
+.book-title {
+    font-weight: 600;
+    color: #0070f3;
+}
+
+.slds-scrollable {
+    overflow-y: auto;
+}
+
+table {
+    min-width: 100%;
+}

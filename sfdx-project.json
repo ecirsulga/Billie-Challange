@@ -1,0 +1,20 @@
+{
+  "packageDirectories": [
+    {
+      "versionName": "ver 0.1",
+      "versionNumber": "0.1.0.NEXT",
+      "path": "force-app",
+      "default": true,
+      "package": "Most Published Books",
+      "versionDescription": ""
+    }
+  ],
+  "name": "billie-assignment",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "64.0",
+  "packageAliases": {
+    "Most Published Books": "0HogL0000000Q5lSAE",
+    "Most Published Books@0.1.0-1": "04tgL00000051wLQAQ"
+  }
+}
